@@ -31,3 +31,7 @@ SOFTWARE.
 # Execution
 
 `ruby run.rb` or `make run`
+
+# Disclaimer
+
+In order to run this tool in a `Window` environment, the "Windows Subsystem for Linux" have to be activated. I would recommend to use [Termux](https://github.com/termux/termux-app.git) for `Android` and [iSH](https://github.com/ish-app/ish.git) for `iOS`.
