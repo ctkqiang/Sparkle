@@ -23,11 +23,19 @@ class Sparkle
             end
 
             if ARGV[0] 
-                $url = ARGV[1] 
+                $url = ARGV[1] if $url.nil?
             end
 
             parser.on("-d", "--ddos [url] or [ipaddr]", @@choice[1]) do
-                Slowloris.new(target=$url, socket_number=@@socket_counts).attack()
+                begin
+                    if $url.nil?
+                        puts "Please insert an url or ipaddress of your target."
+                    else
+                        Slowloris.new(target=$url, socket_number=@@socket_counts).attack()
+                    end
+                rescue
+                   raise "DDOS Attack failed"
+                end
             end
         end.parse!  
     end
