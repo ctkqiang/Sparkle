@@ -1,29 +1,34 @@
 require "tty-prompt"
 require 'optparse'
 require_relative "./tools/phishing.rb"
+require_relative "./tools/ddos_slowloris.rb"
 
 class Sparkle
     def initialize
-        @@choice = ["Generate phishing url"]
+        @@socket_counts = 999
+        @@choice = ["Local Network Phishing attack", "DDOS Slowloris attack"]
         @@options = {}
         @@prompt = TTY::Prompt.new
     end    
 
     def menu()
-        # parser = OptionParser.new do |parser|     
-        #     parser.on("-k",  "--Phishing", "Activate Phishing") do
-        #         puts "Phishing" 
-        #     end
-        #     parser.on("-s",  "--stenography", "Stenography") do 
-        #     end
-        # end
-        # parser.parse!(into: @@options)
+        OptionParser.new do |parser|    
+            parser.banner = "Usage: ruby run.rb [arguements]\n"
 
-        menu = @@prompt.select("Please select a tool", @@choice)
+            parser.on("-p",  "--phishing", @@choice[0]) do
+                Phishing.new().start_server()
+            end
 
-        if menu == @@choice[0]
-            # TODO add Phishing 
-            Phishing.new().start_server()
-        end
+            parser.on("-s",  "--stenography", "Stenography") do
+            end
+
+            if ARGV[0] 
+                $url = ARGV[1] 
+            end
+
+            parser.on("-d", "--ddos [url] or [ipaddr]", @@choice[1]) do
+                Slowloris.new(target=$url, socket_number=@@socket_counts).attack()
+            end
+        end.parse!  
     end
 end

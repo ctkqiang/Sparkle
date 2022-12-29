@@ -1,7 +1,3 @@
-run:
-	- ruby run.rb
-
-
 install:
 	- gem install optparse
 	- gem install tty-prompt

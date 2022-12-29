@@ -30,8 +30,18 @@ SOFTWARE.
 
 # Execution
 
-`ruby run.rb` or `make run`
+`ruby run.rb`
+
+# How to use?
+
+Refer `ruby run.rb --help` or `ruby run.rb -h`
 
 # Disclaimer
 
+Neither myself nor whoever has contribute indirectly to this implementation will take any responsibility for damages caused using this script or any other variation based on it.
+
 In order to run this tool in a `Window` environment, the "Windows Subsystem for Linux" have to be activated. I would recommend to use [Termux](https://github.com/termux/termux-app.git) for `Android` and [iSH](https://github.com/ish-app/ish.git) for `iOS`.
+
+# Support
+
+No support will be provided. Use it at your own risk. But if you need to get in touch for any other reason or you have significant improvement advices to share, please open an issue and I promise I'll try to respond it as soon as possible.
